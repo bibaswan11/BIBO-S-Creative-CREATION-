@@ -51,3 +51,18 @@ function filterCategory(cat) {
   if (cat === "all") renderGallery(items);
   else renderGallery(items.filter(i => i.category === cat));
 }
+fetch('data.json')
+  .then(res => res.json())
+  .then(products => {
+    const container = document.getElementById('product-container');
+    products.forEach(product => {
+      const card = document.createElement('div');
+      card.classList.add('product-card');
+      card.innerHTML = `
+        <img src="${product.image}" alt="${product.name}" width="200">
+        <h3>${product.name}</h3>
+        <p>₹${product.price}</p>
+      `;
+      container.appendChild(card);
+    });
+  });
